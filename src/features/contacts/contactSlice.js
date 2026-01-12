@@ -41,7 +41,13 @@ import contactService from "./contactService";
 
    const initialState={
     contacts:[],
-        fields:[],
+    pagination:{
+        current_page:1,
+        last_page:1,
+        total:0,
+        per_page:10,
+    },
+        fields:{},
         activityLog:[],
         loading: {
             fetch: false,
@@ -72,7 +78,12 @@ import contactService from "./contactService";
         })
         .addCase(fetchContacts.fulfilled,(state,action)=>{
             state.loading.fetch=false;
-            state.contacts=action.payload || []
+            const pageData=action.payload?.data;
+            state.contacts=pageData?.data || [];
+            state.pagination.current_page=pageData?.current_page;
+            state.pagination.last_page=pageData?.last_page;
+            state.pagination.total=pageData?.total;
+            state.pagination.per_page=pageData?.per_page;
         })
         .addCase(fetchContacts.rejected,(state,action)=>{
             state.loading.fetch=false;
@@ -118,7 +129,7 @@ import contactService from "./contactService";
         })
         .addCase(fetchContactFields.fulfilled,(state,action)=>{
             state.loading.fetch=false;
-            state.fields=action.payload;
+            state.fields=action.payload.data;
         })
         .addCase(fetchContactFields.rejected,(state,action)=>{
             state.loading.fetch=false;
