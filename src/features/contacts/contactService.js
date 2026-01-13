@@ -26,6 +26,14 @@ const getContactFields=async()=>{
     return res.data;
 }
 
+// delete contact
+
+const deleteContact=async(contactId)=>{
+ const res=await api.get(`/user/get`);
+ 
+}
+
+
 // contact activity log
 
 const contactActivityLog=async(contactId)=>{

@@ -60,11 +60,11 @@ const ContactList = () => {
   } 
 
 // 🔹 Error
-if (error) {
+if (error.fetch) {
   return (
     <ErrorState
       title="Failed to load contacts"
-      message={error}
+      message={error.fetch}
       onRetry={() => dispatch(fetchContacts())}
     />
   );
