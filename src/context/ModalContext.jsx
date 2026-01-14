@@ -1,8 +1,11 @@
 import {createContext,useContext,useState} from 'react';
 import Modal from "../components/ui/Modal";
 
-const ModalContext=createContext(null);
-
+const ModalContext = createContext({
+    openModal: () => {},
+    closeModal: () => {},
+  });
+  
 export const useModal=()=>useContext(ModalContext);
 
 export const ModalProvider=({children})=>{
@@ -23,7 +26,7 @@ export const ModalProvider=({children})=>{
         });
     };
 
-    const closeModal=({title,content,size=""})=>{
+    const closeModal=()=>{
         setModal({
             open:false,
             title:"",
